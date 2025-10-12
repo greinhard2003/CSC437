@@ -1,0 +1,12 @@
+:root {
+  --color-background-header: rgb(0, 77, 144);
+  --color-text-header: rgb(255, 255, 255);
+  --font-size-header: 24px;
+  --padding-header: 1em;
+  --margin-header: auto;
+  --display-header: flex;
+  --text-align-header: center;
+  --color-background-body: rgb(200, 223, 232);
+  --color-link: rgb(0, 42, 132);
+  --color-link-visited: rgb(0, 136, 255);
+}

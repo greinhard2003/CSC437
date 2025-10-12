@@ -1,0 +1,20 @@
+header {
+  color: var(--color-text-header);
+  background-color: var(--color-background-header);
+  display: var(--display-header);
+  text-align: var(--text-align-header);
+  font-size: var(--font-size-header);
+  margin: var(--margin-header);
+  padding: var(--padding-header);
+}
+
+body {
+  background-color: var(--color-background-body);
+}
+
+a {
+  color: var(--color-link);
+  &:visited {
+    color: var(--color-link-visited);
+  }
+}
