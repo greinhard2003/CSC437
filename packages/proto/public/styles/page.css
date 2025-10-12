@@ -4,12 +4,14 @@ header {
   display: var(--display-header);
   text-align: var(--text-align-header);
   font-size: var(--font-size-header);
+  font-family: var(--font-family);
   margin: var(--margin-header);
   padding: var(--padding-header);
 }
 
 body {
   background-color: var(--color-background-body);
+  font-family: var(--font-family);
 }
 
 a {
@@ -17,4 +19,12 @@ a {
   &:visited {
     color: var(--color-link-visited);
   }
+}
+
+svg.icon {
+  display: inline;
+  height: 2em;
+  width: 2em;
+  vertical-align: top;
+  fill: currentColor;
 }

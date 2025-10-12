@@ -5,6 +5,7 @@
   --padding-header: 1em;
   --margin-header: auto;
   --display-header: flex;
+  --font-family: "Arvo", serif;
   --text-align-header: center;
   --color-background-body: rgb(200, 223, 232);
   --color-link: rgb(0, 42, 132);
