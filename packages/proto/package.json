@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "public/index.html",
   "scripts": {
-    "start": "http-server"
+    "start": "http-server -p 3000"
   },
   "author": "",
   "license": "ISC",
