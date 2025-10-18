@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/page.css" />
     <link rel="stylesheet" href="styles/tokens.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,21 +14,26 @@
     />
     <title>Woodstock_Event_Schedule</title>
   </head>
-  <body>
+  <body class="page">
     <header>
       <h1>Festi-go-ers</h1>
+      <p>Username</p>
     </header>
-    <h1>Woodstock</h1>
-    <h2>Event Schedule</h2>
-    <ul>
-      <li><a href="woodstock_day-1.html ">Day 1: August 15</a></li>
-      <li><a href="">Day 2: August 16</a></li>
-      <li><a href="">Day 3: August 17</a></li>
-      <li><a href="">Day 4: August 18</a></li>
-    </ul>
-    <div class="images">
-      <img src="/Images/Woodstock_Pic.webp" />
-    </div>
-    <a href="index.html">Back to Events</a>
+    <main>
+      <section>
+        <h1>Woodstock - 1969</h1>
+        <div class="images">
+          <img src="/Images/Woodstock_Pic.webp" />
+        </div>
+        <h2>Event Schedule</h2>
+        <ul class="itinerary">
+          <li><a href="woodstock_day-1.html ">Day 1: August 15</a></li>
+          <li><a href="">Day 2: August 16</a></li>
+          <li><a href="">Day 3: August 17</a></li>
+          <li><a href="">Day 4: August 18</a></li>
+        </ul>
+        <a class="breadcrumb" href="index.html">Back to Events</a>
+      </section>
+    </main>
   </body>
 </html>

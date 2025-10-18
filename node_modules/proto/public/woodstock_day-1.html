@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/page.css" />
     <link rel="stylesheet" href="styles/tokens.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,115 +14,120 @@
     />
     <title>Woodstock_Day_1</title>
   </head>
-  <body>
+  <body class="page">
     <header>
       <h1>Festi-go-ers</h1>
+      <p>Username</p>
     </header>
-    <h1>Event Schedule</h1>
-    <img width="900px" src="/Images/Woodstock_Pic2.webp" />
-    <h2>Main Acts</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Artist</th>
-          <th>Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Richie Havens</td>
-          <td>05:00 pm - 05:30 pm</td>
-        </tr>
-        <tr>
-          <td>Ravi Shankar</td>
-          <td>12:00 am - 12:45 am</td>
-        </tr>
-        <tr>
-          <td>Arlo Guthrie</td>
-          <td>01:45 am - 12:15 am</td>
-        </tr>
-        <tr>
-          <td>Joan Baez</td>
-          <td>03:00 am - 03:45 am</td>
-        </tr>
-      </tbody>
-    </table>
-    <h2>Side Acts</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Artist</th>
-          <th>Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Sweetwater</td>
-          <td>06:15 pm - 07:00 pm</td>
-        </tr>
-        <tr>
-          <td>Bert Sommer</td>
-          <td>07:15 pm - 07:45 pm</td>
-        </tr>
-        <tr>
-          <td>Tim Hardin</td>
-          <td>08:30 pm - 09:15 pm</td>
-        </tr>
-        <tr>
-          <td>Melanie</td>
-          <td>01:00 am - 01:30 am</td>
-        </tr>
-      </tbody>
-    </table>
-    <h1>
-      Listening Plan
-      <svg class="icon">
-        <use
-          href="icons/icons-sprite.svg#rock-and-roll-concert-svgrepo-com"
-        ></use>
-      </svg>
-    </h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Time</th>
-          <th>Activity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>05:00 pm - 05:30 pm</td>
-          <td>Richie Havens</td>
-        </tr>
-        <tr>
-          <td>05:30 pm - 06:15 pm</td>
-          <td>Break / Food</td>
-        </tr>
-        <tr>
-          <td>06:15 pm - 07:00 pm</td>
-          <td>Sweetwater</td>
-        </tr>
-        <tr>
-          <td>07:00 pm - 08:20 pm</td>
-          <td>Power Nap</td>
-        </tr>
-        <tr>
-          <td>08:20 pm - 09:15 pm</td>
-          <td>Tim Hardin</td>
-        </tr>
-        <tr>
-          <td>09:15 pm - 10:30 pm</td>
-          <td>MORE OATS</td>
-        </tr>
-        <tr>
-          <td>10:30 pm - 09:00 am</td>
-          <td>Sleep</td>
-        </tr>
-      </tbody>
-    </table>
-    <h2>Food</h2>
-    <p>Hope you like oats!</p>
-
-    <a href="woodstock.html">Back to Festival</a>
+    <main>
+      <h1>Event Schedule</h1>
+      <div class="images">
+        <img src="/Images/Woodstock_Pic2.webp" />
+      </div>
+      <section class="main-acts">
+        <h2>Main Acts</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Artist</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Richie Havens</td>
+              <td>05:00 pm - 05:30 pm</td>
+            </tr>
+            <tr>
+              <td>Ravi Shankar</td>
+              <td>12:00 am - 12:45 am</td>
+            </tr>
+            <tr>
+              <td>Arlo Guthrie</td>
+              <td>01:45 am - 12:15 am</td>
+            </tr>
+            <tr>
+              <td>Joan Baez</td>
+              <td>03:00 am - 03:45 am</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="side-acts">
+        <h2>Side Acts</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Artist</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sweetwater</td>
+              <td>06:15 pm - 07:00 pm</td>
+            </tr>
+            <tr>
+              <td>Bert Sommer</td>
+              <td>07:15 pm - 07:45 pm</td>
+            </tr>
+            <tr>
+              <td>Tim Hardin</td>
+              <td>08:30 pm - 09:15 pm</td>
+            </tr>
+            <tr>
+              <td>Melanie</td>
+              <td>01:00 am - 01:30 am</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="listening-plan">
+        <h1>Listening Plan</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Activity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>05:00 pm - 05:30 pm</td>
+              <td>Richie Havens</td>
+            </tr>
+            <tr>
+              <td>05:30 pm - 06:15 pm</td>
+              <td>Break / Food</td>
+            </tr>
+            <tr>
+              <td>06:15 pm - 07:00 pm</td>
+              <td>Sweetwater</td>
+            </tr>
+            <tr>
+              <td>07:00 pm - 08:20 pm</td>
+              <td>Power Nap</td>
+            </tr>
+            <tr>
+              <td>08:20 pm - 09:15 pm</td>
+              <td>Tim Hardin</td>
+            </tr>
+            <tr>
+              <td>09:15 pm - 10:30 pm</td>
+              <td>MORE OATS</td>
+            </tr>
+            <tr>
+              <td>10:30 pm - 09:00 am</td>
+              <td>Sleep</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="food">
+        <h2>Food</h2>
+        <p>Hope you like oats!</p>
+      </section>
+      <a class="breadcrumb" href="woodstock.html">Back to Festival</a>
+    </main>
   </body>
 </html>

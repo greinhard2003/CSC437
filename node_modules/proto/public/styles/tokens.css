@@ -3,8 +3,8 @@
   --color-text-header: rgb(255, 255, 255);
   --font-size-header: 24px;
   --padding-header: 1em;
+  --padding-body: 4em;
   --margin-header: auto;
-  --display-header: flex;
   --font-family: "Arvo", serif;
   --text-align-header: center;
   --color-background-body: rgb(200, 223, 232);

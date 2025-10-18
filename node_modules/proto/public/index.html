@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/page.css" />
     <link rel="stylesheet" href="styles/tokens.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,30 +14,54 @@
     />
     <title>Festi-go-ers</title>
   </head>
-  <body>
+  <body class="page">
     <header>
       <h1>Festi-go-ers</h1>
+      <p>Username</p>
     </header>
-    <h2>Events Planned</h2>
-    <dl>
-      <dt>
-        <strong>Festival</strong>
-        <svg class="icon">
-          <use
-            href= "icons/icons-sprite.svg#perform-svgrepo-com"
-          ></use>
-        </svg>
-      </dt>
-      <dd>Woodstock</dd>
-      <dt><strong>Location</strong></dt>
-      <dd>Bethel, NY</dd>
-      <dt><strong>Dates</strong></dt>
-      <dd>August 15-18, 1969</dd>
-      <dt><strong>Party</strong></dt>
-      <dd>Person 1</dd>
-      <dd>Person 2</dd>
-      <dd>Person 3</dd>
-    </dl>
-    <a href="woodstock.html">View Event</a>
+    <main>
+      <section>
+        <h2>Events Planned</h2>
+        <dl class="events-list">
+          <div class="event-item">
+            <dt>
+              <strong>Festival</strong>
+              <svg class="icon">
+                <use href="icons/icons-sprite.svg#perform-svgrepo-com"></use>
+              </svg>
+            </dt>
+            <dd>Woodstock</dd>
+            <dt><strong>Location</strong></dt>
+            <dd>Bethel, NY</dd>
+            <dt><strong>Dates</strong></dt>
+            <dd>August 15-18, 1969</dd>
+            <dt><strong>Party</strong></dt>
+            <dd>Person 1</dd>
+            <dd>Person 2</dd>
+            <dd>Person 3</dd>
+            <dd><a href="woodstock.html">View Event</a></dd>
+          </div>
+
+          <div class="event-item">
+            <dt>
+              <strong>Festival</strong>
+              <svg class="icon">
+                <use href="icons/icons-sprite.svg#perform-svgrepo-com"></use>
+              </svg>
+            </dt>
+            <dd>FESTIVAL NAME</dd>
+            <dt><strong>Location</strong></dt>
+            <dd>LOCATION</dd>
+            <dt><strong>Dates</strong></dt>
+            <dd>DATE RANGE</dd>
+            <dt><strong>Party</strong></dt>
+            <dd>Person 1</dd>
+            <dd>Person 2</dd>
+            <dd>Person 3</dd>
+            <dd><a href="">View Event</a></dd>
+          </div>
+        </dl>
+      </section>
+    </main>
   </body>
 </html>
