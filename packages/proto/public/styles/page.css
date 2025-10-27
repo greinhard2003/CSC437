@@ -15,7 +15,13 @@ header {
 body {
   background-color: var(--color-background-body);
   font-family: var(--font-family);
+  color: var(--color-text-body);
   padding-bottom: var(--padding-body);
+}
+
+body.dark-mode {
+  background-color: var(--color-background-body-dark);
+  color: var(--color-text-body-dark);
 }
 
 a {

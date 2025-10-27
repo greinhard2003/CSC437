@@ -15,9 +15,35 @@
     <title>Woodstock_Event_Schedule</title>
   </head>
   <body class="page">
+    <script>
+      document.body.addEventListener("dark-mode:toggle", (event) => {
+        const page = event.currentTarget;
+        const checked = event.detail.checked;
+        page.classList.toggle("dark-mode", checked);
+      });
+
+      function toggleDarkMode(target, checked) {
+        const customEvent = new CustomEvent("dark-mode:toggle", {
+          bubbles: true,
+          detail: { checked },
+        });
+
+        target.dispatchEvent(customEvent);
+      }
+    </script>
     <header>
       <h1>Festi-go-ers</h1>
-      <p>Username</p>
+      <div>
+        <p>Username</p>
+        <label for="dark-toggle">
+          <input
+            id="dark-toggle"
+            type="checkbox"
+            onchange="toggleDarkMode(document.body, this.checked)"
+          />
+          Dark mode
+        </label>
+      </div>
     </header>
     <main>
       <section>

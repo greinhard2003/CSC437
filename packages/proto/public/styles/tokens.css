@@ -1,6 +1,8 @@
 :root {
   --color-background-header: rgb(0, 77, 144);
   --color-text-header: rgb(255, 255, 255);
+  --color-text-body: rgb(0, 0, 0);
+  --color-text-body-dark: rgb(255, 255, 255);
   --font-size-header: 24px;
   --padding-header: 1em;
   --padding-body: 4em;
@@ -8,6 +10,7 @@
   --font-family: "Arvo", serif;
   --text-align-header: center;
   --color-background-body: rgb(200, 223, 232);
+  --color-background-body-dark: rgb(13, 12, 16);
   --color-link: rgb(0, 42, 132);
   --color-link-visited: rgb(0, 136, 255);
 }
