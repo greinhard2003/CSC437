@@ -1,70 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/reset.css" />
-    <link rel="stylesheet" href="styles/page.css" />
-    <link rel="stylesheet" href="styles/tokens.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-      rel="stylesheet"
-    />
-    <title>Woodstock_Day_1</title>
-  </head>
-  <body class="page">
-    <script>
-      const THEME_KEY = "theme";
+import { html, css, LitElement } from "lit";
+import { property } from "lit/decorators.js";
 
-      function applySavedTheme() {
-        const saved = localStorage.getItem(THEME_KEY);
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-        const isDark = saved ? saved === "dark" : prefersDark;
+export class EventDayElement extends LitElement {
+  @property({ type: String, attribute: "img-src" })
+  imgSrc = "";
 
-        document.body.classList.toggle("dark-mode", isDark);
-        const toggle = document.getElementById("dark-toggle");
-        if (toggle) toggle.checked = isDark;
-      }
-
-      document.addEventListener("DOMContentLoaded", applySavedTheme);
-
-      document.body.addEventListener("dark-mode:toggle", (event) => {
-        const page = event.currentTarget;
-        const checked = event.detail.checked;
-        page.classList.toggle("dark-mode", checked);
-        localStorage.setItem(THEME_KEY, checked ? "dark" : "light");
-      });
-
-      function toggleDarkMode(target, checked) {
-        const customEvent = new CustomEvent("dark-mode:toggle", {
-          bubbles: true,
-          detail: { checked },
-        });
-        target.dispatchEvent(customEvent);
-      }
-    </script>
-    <header>
-      <h1>Festi-go-ers</h1>
-      <div>
-        <p>Username</p>
-        <label for="dark-toggle">
-          <input
-            id="dark-toggle"
-            type="checkbox"
-            onchange="toggleDarkMode(document.body, this.checked)"
-          />
-          Dark mode
-        </label>
-      </div>
-    </header>
-    <main>
+  override render() {
+    return html`
       <h1>Event Schedule</h1>
       <div class="images">
-        <img src="/Images/Woodstock_Pic2.webp" />
+        <img src="${this.imgSrc}" />
       </div>
       <section class="main-acts">
         <h2>Main Acts</h2>
@@ -125,7 +70,7 @@
         </table>
       </section>
       <section class="listening-plan">
-        <h1>Listening Plan</h1>
+        <h2>Listening Plan</h2>
         <table>
           <thead>
             <tr>
@@ -170,6 +115,75 @@
         <p>Hope you like oats!</p>
       </section>
       <a class="breadcrumb" href="woodstock.html">Back to Festival</a>
-    </main>
-  </body>
-</html>
+    `;
+  }
+
+  static styles = css`
+    :host {
+      display: grid;
+      grid-column: start / span 7;
+      grid-template-columns: subgrid;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 0.75rem;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    th,
+    td {
+      padding-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    h1 {
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-column: start / end;
+      margin-top: 0;
+    }
+
+    .images {
+      flex-direction: column;
+      display: flex;
+      grid-column: 2 / 7;
+      padding: 1rem;
+    }
+
+    .main-acts {
+      display: flex;
+      flex-direction: column;
+      grid-column: 2 / span 1;
+    }
+
+    .side-acts {
+      display: flex;
+      flex-direction: column;
+      grid-column: 3 / span 1;
+    }
+
+    .listening-plan {
+      display: flex;
+      flex-direction: column;
+      grid-column: 5 / span 1;
+    }
+
+    .food {
+      display: flex;
+      flex-direction: column;
+      grid-column: 6 / span 1;
+    }
+
+    .breadcrumb {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      grid-column: 3 / 6;
+    }
+  `;
+}

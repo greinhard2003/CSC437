@@ -12,10 +12,17 @@
       href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
-    <title>Woodstock_Event_Schedule</title>
+    <title>Woodstock_Day_1</title>
   </head>
   <body class="page">
-    <script>
+    <script type="module">
+      import { define } from "@calpoly/mustang";
+      import { EventDayElement } from "./src/event_day.ts";
+
+      define({
+        "event-day": EventDayElement,
+      });
+
       const THEME_KEY = "theme";
 
       function applySavedTheme() {
@@ -46,6 +53,7 @@
         });
         target.dispatchEvent(customEvent);
       }
+      globalThis.toggleDarkMode = toggleDarkMode;
     </script>
     <header>
       <h1>Festi-go-ers</h1>
@@ -61,21 +69,6 @@
         </label>
       </div>
     </header>
-    <main>
-      <section>
-        <h1>Woodstock - 1969</h1>
-        <div class="images">
-          <img src="/Images/Woodstock_Pic.webp" />
-        </div>
-        <h2>Event Schedule</h2>
-        <ul class="itinerary">
-          <li><a href="woodstock_day-1.html ">Day 1: August 15</a></li>
-          <li><a href="">Day 2: August 16</a></li>
-          <li><a href="">Day 3: August 17</a></li>
-          <li><a href="">Day 4: August 18</a></li>
-        </ul>
-        <a class="breadcrumb" href="index.html">Back to Events</a>
-      </section>
-    </main>
+    <event-day img-src="/Images/woodstock_Pic2.png"></event-day>
   </body>
 </html>
