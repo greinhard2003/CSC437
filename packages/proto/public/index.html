@@ -16,10 +16,27 @@
   </head>
   <body class="page">
     <script>
+      const THEME_KEY = "theme";
+
+      function applySavedTheme() {
+        const saved = localStorage.getItem(THEME_KEY);
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const isDark = saved ? saved === "dark" : prefersDark;
+
+        document.body.classList.toggle("dark-mode", isDark);
+        const toggle = document.getElementById("dark-toggle");
+        if (toggle) toggle.checked = isDark;
+      }
+
+      document.addEventListener("DOMContentLoaded", applySavedTheme);
+
       document.body.addEventListener("dark-mode:toggle", (event) => {
         const page = event.currentTarget;
         const checked = event.detail.checked;
         page.classList.toggle("dark-mode", checked);
+        localStorage.setItem(THEME_KEY, checked ? "dark" : "light");
       });
 
       function toggleDarkMode(target, checked) {
@@ -27,7 +44,6 @@
           bubbles: true,
           detail: { checked },
         });
-
         target.dispatchEvent(customEvent);
       }
     </script>
