@@ -1,15 +1,80 @@
 import { html, css, LitElement } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
+
+export interface EventActivity {
+  activity: string;
+  time: string;
+}
+
+export interface Food {
+  item: string;
+}
+
+export interface EventData {
+  main_acts: EventActivity[];
+  sideActs: EventActivity[];
+  listeningPlan: EventActivity[];
+  imageSrc: string;
+  foods: Food[];
+  breadcrumbHref: string;
+}
+
+function buildTableRows(acts: Array<EventActivity>) {
+  return html`
+    ${acts.map(
+      (act) => html`
+        <tr>
+          <td>${act.activity}</td>
+          <td>${act.time}</td>
+        </tr>
+      `
+    )}
+  `;
+}
+
+function buildFoodRows(foodItems: Array<Food>) {
+  return html` ${foodItems.map((food) => html` <p>${food.item}</p> `)} `;
+}
 
 export class EventDayElement extends LitElement {
-  @property({ type: String, attribute: "img-src" })
-  imgSrc = "";
+  @property()
+  src?: string;
+  @state()
+  mainEvents: Array<EventActivity> = [];
+  @state()
+  sideEvents: Array<EventActivity> = [];
+  @state()
+  listeningPlan: Array<EventActivity> = [];
+  @state()
+  imageSrc: string = "";
+  @state()
+  food: Array<Food> = [];
+  @state()
+  breadcrumbHref: string = "";
+
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.src) this.hydrate(this.src);
+  }
+
+  hydrate(src: string) {
+    fetch(src)
+      .then((response) => response.json())
+      .then((json: EventData) => {
+        this.mainEvents = json.main_acts;
+        this.sideEvents = json.sideActs;
+        this.listeningPlan = json.listeningPlan;
+        this.imageSrc = json.imageSrc;
+        this.food = json.foods;
+        this.breadcrumbHref = json.breadcrumbHref;
+      });
+  }
 
   override render() {
     return html`
       <h1>Event Schedule</h1>
       <div class="images">
-        <img src="${this.imgSrc}" />
+        <img src="${this.imageSrc}" />
       </div>
       <section class="main-acts">
         <h2>Main Acts</h2>
@@ -21,22 +86,7 @@ export class EventDayElement extends LitElement {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Richie Havens</td>
-              <td>05:00 pm - 05:30 pm</td>
-            </tr>
-            <tr>
-              <td>Ravi Shankar</td>
-              <td>12:00 am - 12:45 am</td>
-            </tr>
-            <tr>
-              <td>Arlo Guthrie</td>
-              <td>01:45 am - 12:15 am</td>
-            </tr>
-            <tr>
-              <td>Joan Baez</td>
-              <td>03:00 am - 03:45 am</td>
-            </tr>
+            ${buildTableRows(this.mainEvents)}
           </tbody>
         </table>
       </section>
@@ -50,22 +100,7 @@ export class EventDayElement extends LitElement {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Sweetwater</td>
-              <td>06:15 pm - 07:00 pm</td>
-            </tr>
-            <tr>
-              <td>Bert Sommer</td>
-              <td>07:15 pm - 07:45 pm</td>
-            </tr>
-            <tr>
-              <td>Tim Hardin</td>
-              <td>08:30 pm - 09:15 pm</td>
-            </tr>
-            <tr>
-              <td>Melanie</td>
-              <td>01:00 am - 01:30 am</td>
-            </tr>
+            ${buildTableRows(this.sideEvents)}
           </tbody>
         </table>
       </section>
@@ -79,42 +114,15 @@ export class EventDayElement extends LitElement {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>05:00 pm - 05:30 pm</td>
-              <td>Richie Havens</td>
-            </tr>
-            <tr>
-              <td>05:30 pm - 06:15 pm</td>
-              <td>Break / Food</td>
-            </tr>
-            <tr>
-              <td>06:15 pm - 07:00 pm</td>
-              <td>Sweetwater</td>
-            </tr>
-            <tr>
-              <td>07:00 pm - 08:20 pm</td>
-              <td>Power Nap</td>
-            </tr>
-            <tr>
-              <td>08:20 pm - 09:15 pm</td>
-              <td>Tim Hardin</td>
-            </tr>
-            <tr>
-              <td>09:15 pm - 10:30 pm</td>
-              <td>MORE OATS</td>
-            </tr>
-            <tr>
-              <td>10:30 pm - 09:00 am</td>
-              <td>Sleep</td>
-            </tr>
+            ${buildTableRows(this.listeningPlan)}
           </tbody>
         </table>
       </section>
       <section class="food">
         <h2>Food</h2>
-        <p>Hope you like oats!</p>
+        ${buildFoodRows(this.food)}
       </section>
-      <a class="breadcrumb" href="woodstock.html">Back to Festival</a>
+      <a class="breadcrumb" href="${this.breadcrumbHref}">Back to Festival</a>
     `;
   }
 
@@ -145,7 +153,7 @@ export class EventDayElement extends LitElement {
       display: grid;
       grid-template-columns: subgrid;
       grid-column: start / end;
-      margin-top: 0;
+      padding: 1rem;
     }
 
     .images {

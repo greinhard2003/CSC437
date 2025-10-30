@@ -1,0 +1,26 @@
+{
+  "main_acts": [
+    { "activity": "Richie Havens", "time": "05:00 pm - 05:30 pm" },
+    { "activity": "Ravi Shankar", "time": "12:00 am - 12:45 am" },
+    { "activity": "Arlo Guthrie", "time": "01:45 am - 12:15 am" },
+    { "activity": "Joan Baez", "time": "03:00 am - 03:45 am" }
+  ],
+  "sideActs": [
+    { "activity": "Sweetwater", "time": "06:15 pm - 07:00 pm" },
+    { "activity": "Bert Sommer", "time": "07:15 pm - 07:45 pm" },
+    { "activity": "Tim Hardin", "time": "08:30 pm - 09:15 pm" },
+    { "activity": "Melanie", "time": "01:00 am - 01:30 am" }
+  ],
+  "listeningPlan": [
+    { "activity": "Richie Havens", "time": "05:00 pm - 05:30 pm" },
+    { "activity": "Break / Food", "time": "05:30 pm - 06:15 pm" },
+    { "activity": "Sweetwater", "time": "06:15 pm - 07:00 pm" },
+    { "activity": "Power Nap", "time": "07:00 pm - 08:20 pm" },
+    { "activity": "Tim Hardin", "time": "08:20 pm - 09:15 pm" },
+    { "activity": "MORE OATS", "time": "09:15 pm - 10:30 pm" },
+    { "activity": "Sleep", "time": "10:30 pm - 09:00 am" }
+  ],
+  "imageSrc": "/Images/woodstock_Pic2.png",
+  "foods": [{ "item": "Hope you like oats!" }],
+  "breadcrumbHref": "woodstock.html"
+}
