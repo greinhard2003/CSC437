@@ -26,4 +26,29 @@ function get(userid: String): Promise<User> {
     });
 }
 
-export default { index, get };
+function create(json: User): Promise<User> {
+  const user = new UserModel(json);
+  return user.save();
+}
+
+function update(userid: String, user: User): Promise<User> {
+  return UserModel.findOneAndUpdate({ userid }, user, {
+    new: true,
+  }).then((updatedUser) => {
+    if (!updatedUser) {
+      throw `${userid} Not Updated`;
+    } else {
+      return updatedUser as User;
+    }
+  });
+}
+
+function remove(userid: String): Promise<void> {
+  return UserModel.findOneAndDelete({ userid }).then((deletedUser) => {
+    if (!deletedUser) {
+      throw `${userid} Not Deleted`;
+    }
+  });
+}
+
+export default { index, get, create, update, remove };
