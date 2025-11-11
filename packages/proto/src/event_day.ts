@@ -1,3 +1,4 @@
+import { Auth, Observer } from "@calpoly/mustang";
 import { html, css, LitElement } from "lit";
 import { property, state } from "lit/decorators.js";
 
@@ -52,13 +53,22 @@ export class EventDayElement extends LitElement {
   @state()
   breadcrumbHref: string = "";
 
-  connectedCallback() {
-    super.connectedCallback();
-    if (this.src) this.hydrate(this.src);
+  _authObserver = new Observer<Auth.Model>(this, "festigoer:auth");
+  _user?: Auth.User;
+
+  get authorization() {
+    if (this._user?.authenticated) {
+      return {
+        Authorization: `Bearer ${(this._user as Auth.AuthenticatedUser).token}`,
+      };
+    }
+    return undefined;
   }
 
   hydrate(src: string) {
-    fetch(src)
+    fetch(src, {
+      headers: this.authorization,
+    })
       .then((response) => response.json())
       .then((json: EventData) => {
         this.mainEvents = json.main_acts;
@@ -68,6 +78,14 @@ export class EventDayElement extends LitElement {
         this.food = json.foods;
         this.breadcrumbHref = json.breadcrumbHref;
       });
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._authObserver.observe((auth: Auth.Model) => {
+      this._user = auth.user;
+      if (this._user?.authenticated && this.src) this.hydrate(this.src);
+    });
   }
 
   override render() {

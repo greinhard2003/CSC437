@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { connect } from "./services/mongo";
 import Users from "./services/user-svc";
 import users from "./routes/users";
+import auth, { authenticateUser } from "./routes/auth";
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -13,7 +14,9 @@ app.use(express.static(staticDir));
 
 app.use(express.json());
 
-app.use("/api/users", users);
+app.use("/auth", auth);
+
+app.use("/api/users", authenticateUser, users);
 
 app.get("/hello", (req: Request, res: Response) => {
   res.send("Hello, World");
