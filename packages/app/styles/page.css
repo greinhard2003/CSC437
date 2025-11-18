@@ -1,0 +1,131 @@
+header {
+  color: var(--color-text-header);
+  background-color: var(--color-background-header);
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  text-align: var(--text-align-header);
+  font-size: var(--font-size-header);
+  font-family: var(--font-family);
+  margin: var(--margin-header);
+  padding: var(--padding-header);
+}
+
+body {
+  background-color: var(--color-background-body);
+  font-family: var(--font-family);
+  color: var(--color-text-body);
+  padding-bottom: var(--padding-body);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: var(--color-link);
+  &:visited {
+    color: var(--color-link-visited);
+  }
+}
+
+svg.icon {
+  display: inline;
+  height: 2em;
+  width: 2em;
+  vertical-align: top;
+  fill: currentColor;
+}
+
+.page {
+  display: grid;
+  grid-template-columns: [start] 1fr 1fr 1fr 1fr 1fr 1fr 1fr [end];
+}
+
+.page > header {
+  grid-column: start / end;
+}
+
+.page > main {
+  display: grid;
+  grid-column: start / end;
+  grid-template-columns: subgrid;
+  grid-template-rows: auto;
+}
+
+.images {
+  flex-direction: column;
+  display: flex;
+  grid-column: 2 / 7;
+  padding: 1rem;
+}
+
+main > section > h2,
+h1 {
+  grid-column: start / end;
+  margin-top: 0;
+}
+
+main > section {
+  display: grid;
+  grid-column: start / span 7;
+  grid-template-columns: subgrid;
+  gap: 1rem;
+}
+
+.events-list {
+  display: grid;
+  grid-column: 2 / span 5;
+  grid-template-columns: subgrid;
+}
+
+.event-item {
+  display: grid;
+  gap: 0.5em;
+  margin: 1rem;
+}
+
+.itinerary {
+  display: grid;
+  grid-column: 2 / 6;
+  grid-template-columns: subgrid;
+}
+
+.itinerary > li {
+  display: grid;
+  margin: 0.5rem;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-column: 3 / 6;
+}
+
+section {
+  margin: 0;
+  padding: 0.5rem;
+}
+
+.main-acts {
+  display: flex;
+  flex-direction: column;
+  grid-column: 2 / span 1;
+}
+
+.side-acts {
+  display: flex;
+  flex-direction: column;
+  grid-column: 3 / span 1;
+}
+
+.listening-plan {
+  display: flex;
+  flex-direction: column;
+  grid-column: 4 / span 1;
+}
+
+.food {
+  display: flex;
+  flex-direction: column;
+  grid-column: 5 / span 1;
+}

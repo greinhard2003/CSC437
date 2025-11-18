@@ -3,9 +3,15 @@ import { User } from "../models/user";
 
 const UserSchema = new Schema<User>(
   {
-    userid: { type: String, required: true, trim: true },
-    name: { type: String, required: true, trim: true },
-    nickname: { type: String, trim: true },
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      immutable: true,
+    },
+    firstname: { type: String, required: true, trim: true },
+    lastname: { type: String, trim: true },
     email: { type: String, required: true, trim: true },
     favoriteGenre: { type: String, required: true, trim: true },
   },
@@ -18,11 +24,11 @@ function index(): Promise<User[]> {
   return UserModel.find();
 }
 
-function get(userid: String): Promise<User> {
-  return UserModel.find({ userid })
+function get(username: String): Promise<User> {
+  return UserModel.find({ _id: username })
     .then((list) => list[0])
     .catch((err) => {
-      throw `${userid} Not Found`;
+      throw `${username} Not Found`;
     });
 }
 
@@ -31,22 +37,24 @@ function create(json: User): Promise<User> {
   return user.save();
 }
 
-function update(userid: String, user: User): Promise<User> {
-  return UserModel.findOneAndUpdate({ userid }, user, {
+function update(username: String, user: User): Promise<User> {
+  return UserModel.findOneAndUpdate({ username: username }, user, {
     new: true,
+    runValidators: true,
+    context: "query",
   }).then((updatedUser) => {
     if (!updatedUser) {
-      throw `${userid} Not Updated`;
+      throw `${username} Not Updated`;
     } else {
       return updatedUser as User;
     }
   });
 }
 
-function remove(userid: String): Promise<void> {
-  return UserModel.findOneAndDelete({ userid }).then((deletedUser) => {
+function remove(username: String): Promise<void> {
+  return UserModel.findOneAndDelete({ _id: username }).then((deletedUser) => {
     if (!deletedUser) {
-      throw `${userid} Not Deleted`;
+      throw `${username} Not Deleted`;
     }
   });
 }

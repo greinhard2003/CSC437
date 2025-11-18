@@ -3,6 +3,7 @@ import express, { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
 import credentials from "../services/credential-svc";
+import usersvc from "../services/user-svc";
 
 const router = express.Router();
 
@@ -10,11 +11,24 @@ dotenv.config();
 const TOKEN_SECRET: string = process.env.TOKEN_SECRET || "NOT_A_SECRET";
 
 router.post("/register", (req: Request, res: Response) => {
-  const { username, password } = req.body; // from form
+  const { username, firstname, lastname, favoriteGenre, email, password } =
+    req.body; // from form
 
-  if (typeof username !== "string" || typeof password !== "string") {
+  if (
+    typeof username !== "string" ||
+    typeof password !== "string" ||
+    typeof firstname !== "string" ||
+    typeof lastname !== "string" ||
+    typeof email !== "string" ||
+    typeof favoriteGenre !== "string"
+  ) {
     res.status(400).send("Bad request: Invalid input data.");
   } else {
+    usersvc
+      .create({ username, firstname, lastname, email, favoriteGenre })
+      .catch((err) => {
+        throw new Error("User creation failed: " + err.message);
+      });
     credentials
       .create(username, password)
       .then((creds) => generateAccessToken(creds.username))

@@ -35,6 +35,7 @@ export class HeaderElement extends LitElement {
     return html`
       <header>
         <h1>Festi-go-ers</h1>
+
         <mu-dropdown>
           <a slot="actuator"> Hello, ${this.userid || "Guest"} </a>
           <div class="dropdown-background">
@@ -69,7 +70,7 @@ export class HeaderElement extends LitElement {
         @click=${(e: UIEvent) => {
           Events.relay(e, "auth:message", ["auth/signout"]);
 
-          window.location.href = "/login.html";
+          window.location.href = "/app";
         }}
       >
         Sign Out
@@ -78,7 +79,7 @@ export class HeaderElement extends LitElement {
   }
 
   renderSignInButton() {
-    return html` <a href="/login.html"> Sign In… </a> `;
+    return html` <a href="/app"> Sign In… </a> `;
   }
 
   static _initialized = false;
@@ -119,18 +120,34 @@ export class HeaderElement extends LitElement {
 
     a {
       color: var(--color-text-header);
+      text-decoration: none;
     }
 
     .dropdown-background {
       background-color: var(--color-background-body);
-      border: 1px solid black;
       color: var(--color-text-body);
+      border: 1px solid var(--color-border, rgba(0, 0, 0, 0.25));
       padding: 0.5rem 1rem;
       border-radius: 0.5rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     li {
       list-style: none;
+    }
+
+    button {
+      background: rgba(84, 84, 85, 1);
+      border: 1px solid var(--color-border, rgba(0, 0, 0, 0.25));
+      color: var(--color-text-body);
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: var(--color-background-body);
     }
   `;
 }

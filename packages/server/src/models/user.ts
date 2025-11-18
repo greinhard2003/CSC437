@@ -1,7 +1,7 @@
 export interface User {
-  userid: string;
-  name: string;
-  nickname: string | undefined;
+  username: string;
+  firstname: string;
+  lastname: string;
   email: string;
   favoriteGenre: string;
 }
