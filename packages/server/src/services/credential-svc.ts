@@ -4,6 +4,10 @@ import { Credential } from "../models/credential.js";
 
 const credentialSchema = new Schema<Credential>(
   {
+    userId: {
+      type: String,
+      required: true,
+    },
     username: {
       type: String,
       required: true,
@@ -17,7 +21,11 @@ const credentialSchema = new Schema<Credential>(
   { collection: "user_credentials" }
 );
 
-function create(username: string, password: string): Promise<Credential> {
+function create(
+  userId: string,
+  username: string,
+  password: string
+): Promise<Credential> {
   return credentialModel
     .find({ username })
     .then((found: Credential[]) => {
@@ -29,6 +37,7 @@ function create(username: string, password: string): Promise<Credential> {
         .then((salt: string) => bcrypt.hash(password, salt))
         .then((hashedPassword: string) => {
           const creds = new credentialModel({
+            userId,
             username,
             hashedPassword,
           });
@@ -37,7 +46,10 @@ function create(username: string, password: string): Promise<Credential> {
     );
 }
 
-function verify(username: string, password: string): Promise<string> {
+function verify(
+  username: string,
+  password: string
+): Promise<{ userId: string; username: string }> {
   return credentialModel
     .find({ username })
     .then((found) => {
@@ -49,7 +61,7 @@ function verify(username: string, password: string): Promise<string> {
         .compare(password, credsOnFile.hashedPassword)
         .then((result: boolean) => {
           if (!result) throw "Invalid username or password";
-          return credsOnFile.username;
+          return { userId: credsOnFile.userId, username: credsOnFile.username };
         })
     );
 }

@@ -10,9 +10,9 @@ const router = express.Router();
 dotenv.config();
 const TOKEN_SECRET: string = process.env.TOKEN_SECRET || "NOT_A_SECRET";
 
-router.post("/register", (req: Request, res: Response) => {
+router.post("/register", (req, res) => {
   const { username, firstname, lastname, favoriteGenre, email, password } =
-    req.body; // from form
+    req.body;
 
   if (
     typeof username !== "string" ||
@@ -22,43 +22,51 @@ router.post("/register", (req: Request, res: Response) => {
     typeof email !== "string" ||
     typeof favoriteGenre !== "string"
   ) {
-    res.status(400).send("Bad request: Invalid input data.");
-  } else {
-    usersvc
-      .create({ username, firstname, lastname, email, favoriteGenre })
-      .catch((err) => {
-        throw new Error("User creation failed: " + err.message);
-      });
-    credentials
-      .create(username, password)
-      .then((creds) => generateAccessToken(creds.username))
-      .then((token) => {
-        res.status(201).send({ token: token });
-      })
-      .catch((err) => {
-        res.status(409).send({ error: err.message });
-      });
+    return res.status(400).send("Bad request: Invalid input data.");
   }
+
+  usersvc
+    .create({ username, firstname, lastname, email, favoriteGenre })
+    .then((user) =>
+      credentials
+        .create(user._id.toString(), username, password)
+        .then((creds) => ({
+          userId: creds.userId,
+        }))
+    )
+    .then(({ userId }) =>
+      generateAccessToken(userId, username).then((token) => ({ token, userId }))
+    )
+    .then(({ token, userId }) => res.status(201).send({ token, userId }))
+    .catch((err) => {
+      console.error("Registration failed:", err);
+      res.status(409).send({ error: err.message || "Registration failed" });
+    });
 });
 
-router.post("/login", (req: Request, res: Response) => {
-  const { username, password } = req.body; // from form
+router.post("/login", (req, res) => {
+  const { username, password } = req.body;
 
   if (!username || !password) {
-    res.status(400).send("Bad request: Invalid input data.");
-  } else {
-    credentials
-      .verify(username, password)
-      .then((goodUser: string) => generateAccessToken(goodUser))
-      .then((token) => res.status(200).send({ token: token }))
-      .catch((error) => res.status(401).send("Unauthorized"));
+    return res.status(400).send("Bad request: Invalid input data.");
   }
+
+  credentials
+    .verify(username, password)
+    .then(({ userId, username }) =>
+      generateAccessToken(userId, username).then((token) => ({ token, userId }))
+    )
+    .then(({ token, userId }) => res.status(200).send({ token, userId }))
+    .catch(() => res.status(401).send("Unauthorized"));
 });
 
-function generateAccessToken(username: string): Promise<String> {
+function generateAccessToken(
+  userId: string,
+  username: string
+): Promise<string> {
   return new Promise((resolve, reject) => {
     jwt.sign(
-      { username: username },
+      { userId, username },
       TOKEN_SECRET,
       { expiresIn: "1d" },
       (error, token) => {

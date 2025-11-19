@@ -13,7 +13,24 @@ define({
 export class LoginPage extends LitElement {
   @property({ type: String }) api: string = "/auth/login";
 
-  static styles = css``;
+  static styles = css`
+    :host {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-column: start / end;
+    }
+    section {
+      display: flex;
+      flex-direction: column;
+      grid-column: 4 / span 1;
+    }
+    label {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
+  `;
 
   render() {
     return html`

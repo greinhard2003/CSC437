@@ -40,7 +40,18 @@ export class LoginFormElement extends LitElement {
     `;
   }
 
-  static styles = [css``];
+  static styles = [
+    css`
+      :host {
+        display: block;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+    `,
+  ];
 
   handleChange(event: InputEvent) {
     const target = event.target as HTMLInputElement;
@@ -82,6 +93,7 @@ export class LoginFormElement extends LitElement {
           });
           console.log("dispatching message", customEvent);
           this.dispatchEvent(customEvent);
+
           this.dispatchEvent(
             new CustomEvent("festigoer:history", {
               bubbles: true,

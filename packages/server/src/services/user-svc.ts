@@ -1,15 +1,9 @@
-import { Schema, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 import { User } from "../models/user";
 
 const UserSchema = new Schema<User>(
   {
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-      immutable: true,
-    },
+    username: { type: String, required: true, trim: true },
     firstname: { type: String, required: true, trim: true },
     lastname: { type: String, trim: true },
     email: { type: String, required: true, trim: true },
@@ -24,37 +18,35 @@ function index(): Promise<User[]> {
   return UserModel.find();
 }
 
-function get(username: String): Promise<User> {
-  return UserModel.find({ _id: username })
+function get(id: string): Promise<User> {
+  return UserModel.find({ _id: id })
     .then((list) => list[0])
     .catch((err) => {
-      throw `${username} Not Found`;
+      throw `${id} Not Found`;
     });
 }
 
-function create(json: User): Promise<User> {
-  const user = new UserModel(json);
-  return user.save();
+function create(json: User): Promise<User & { _id: Types.ObjectId }> {
+  return new UserModel(json).save().then((d) => d.toObject()); // still has _id
 }
 
-function update(username: String, user: User): Promise<User> {
-  return UserModel.findOneAndUpdate({ username: username }, user, {
+function update(id: string, user: User): Promise<User> {
+  return UserModel.findByIdAndUpdate(id, user, {
     new: true,
     runValidators: true,
     context: "query",
   }).then((updatedUser) => {
     if (!updatedUser) {
-      throw `${username} Not Updated`;
-    } else {
-      return updatedUser as User;
+      throw `${id} Not Updated`;
     }
+    return updatedUser as User;
   });
 }
 
-function remove(username: String): Promise<void> {
-  return UserModel.findOneAndDelete({ _id: username }).then((deletedUser) => {
+function remove(id: string): Promise<void> {
+  return UserModel.findByIdAndDelete(id).then((deletedUser) => {
     if (!deletedUser) {
-      throw `${username} Not Deleted`;
+      throw `${id} Not Deleted`;
     }
   });
 }

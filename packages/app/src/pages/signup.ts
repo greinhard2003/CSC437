@@ -33,7 +33,7 @@ export class SignupFormElement extends LitElement {
 
   render() {
     return html`
-      <img class="image" src="src/images/festigoers_signup_img.jpg" />
+      <img class="image" src="/images/festigoers_signup_img.jpg" />
       <form @input=${this.handleChange} @submit=${this.handleSubmit}>
         <label class="left">
           <span>First Name</span>
@@ -144,7 +144,12 @@ export class SignupFormElement extends LitElement {
       });
 
       if (!res.ok) throw new Error("Signup failed");
-      const { token } = (await res.json()) as { token: string };
+      const { token, userId } = (await res.json()) as {
+        token: string;
+        userId: string;
+      };
+
+      localStorage.setItem("userId", userId);
 
       this.dispatchEvent(
         new CustomEvent("auth:message", {

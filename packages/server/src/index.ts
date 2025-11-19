@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import { connect } from "./services/mongo";
 import Users from "./services/user-svc";
 import users from "./routes/users";
+import Events from "./services/event-svc";
+import events from "./routes/events";
 import auth, { authenticateUser } from "./routes/auth";
 
 const app = express();
@@ -15,6 +17,8 @@ app.use(express.static(staticDir));
 app.use(express.json());
 
 app.use("/auth", auth);
+
+app.use("/api/events", authenticateUser, events);
 
 app.use("/api/users", authenticateUser, users);
 
