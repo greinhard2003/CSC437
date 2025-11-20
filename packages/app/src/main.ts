@@ -1,9 +1,10 @@
 import { Auth, define, History, Switch } from "@calpoly/mustang";
-import { html, LitElement } from "lit";
+import { html } from "lit";
 import { HeaderElement } from "./components/header";
 import { SignupFormElement } from "./pages/signup";
 import { LoginPage } from "./pages/login";
 import { HomePage } from "./pages/home";
+import { PlanEventPage } from "./pages/plan_event";
 
 const routes = [
   {
@@ -25,6 +26,10 @@ const routes = [
     view: () => html` <home-page></home-page> `,
   },
   {
+    path: "/app/home/planevent",
+    view: () => html`<planevent-page></planevent-page>`,
+  },
+  {
     path: "/",
     redirect: "/app",
   },
@@ -39,6 +44,7 @@ define({
   "signup-form": SignupFormElement,
   "login-page": LoginPage,
   "home-page": HomePage,
+  "planevent-page": PlanEventPage,
   "mu-switch": class AppSwitch extends Switch.Element {
     constructor() {
       super(routes, "festigoer:history", "festigoer:auth");

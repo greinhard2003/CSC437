@@ -159,13 +159,6 @@ export class SignupFormElement extends LitElement {
         })
       );
 
-      this.dispatchEvent(
-        new CustomEvent("festigoer:history", {
-          bubbles: true,
-          composed: true,
-          detail: ["history/push", this.redirect],
-        })
-      );
     } catch (err: any) {
       this.error = err?.message || String(err);
       console.error(err);

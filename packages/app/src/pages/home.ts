@@ -87,7 +87,7 @@ export class HomePage extends LitElement {
               </dt>
               <dd>${event.enddate}</dd>
             </div>
-            <a href="event/edit/${event._id}">Edit Festival</a>
+            <a href="home/event/edit/${event._id}">Edit Festival</a>
           </div>
         `
       )}

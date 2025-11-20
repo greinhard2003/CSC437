@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "http-server dist -p 8000",
+    "start": "http-server dist -p 8080",
     "dev": "npx vite",
     "build": "npx tsc && npx vite build"
   },

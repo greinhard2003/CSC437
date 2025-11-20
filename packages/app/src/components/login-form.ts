@@ -84,8 +84,9 @@ export class LoginFormElement extends LitElement {
           if (res.status !== 200) throw "Login failed";
           else return res.json();
         })
-        .then((json: object) => {
-          const { token } = json as { token: string };
+        .then((json: { token: string; userId: string }) => {
+          const { token, userId } = json;
+          localStorage.setItem("userId", userId);
           const customEvent = new CustomEvent("auth:message", {
             bubbles: true,
             composed: true,
